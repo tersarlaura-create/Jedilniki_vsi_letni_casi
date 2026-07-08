@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celoten nabor jedilnikov PKL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --purple: #592c82; --light-purple: #cdc3d8; --white: #ffffff; }
+        body { font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif"; sans-serif; background-color: #cdc3d8; margin: 0; display: flex; justify-content: center; }
+        .container { background-color: var(--white); width: 100%; max-width: 500px; min-height: 100vh; padding: 40px 20px; box-sizing: border-box; text-align: center; }
+        
+        .logo { width: 130px; border-radius: 0%; margin-bottom: 20px; }
+        h1 { color: var(--purple); font-size: 1.3rem; margin-bottom: 30px; text-transform: uppercase; }
+
+        /* Gumbi na prvi strani */
+        .main-menu { display: flex; flex-direction: column; gap: 12px; }
+        .btn { 
+            background: var(--white); border: 2px solid var(--light-purple); color: var(--purple); 
+            padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; 
+            cursor: pointer; font-size: 1rem; transition: 0.3s;
+        }
+        .btn:hover { background: var(--light-purple); color: white; }
+
+        /* Seznam PDF-jev (skrit na začetku) */
+        .pdf-section { display: none; text-align: left; animation: fadeIn 0.5s; }
+        .pdf-item { 
+            background: var(--light-purple); padding: 15px; margin: 10px 0; 
+            border-radius: 6px; display: flex; align-items: center; justify-content: space-between;
+        }
+        .pdf-item a { color: var(--purple); text-decoration: none; font-weight: 500; flex-grow: 1; }
+        .back-btn { background: none; border: none; color: #666; cursor: pointer; margin-bottom: 20px; font-size: 0.9rem; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 600px) { body { background: white; } .container { box-shadow: none; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="data:image/png;base64,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" class="logo" alt="Logo">
+	
+	<h1 id="title">PRIMERI JEDILNIKOV ZA VSE LETNE ČASE</h1>
+		
+    <div id="mainMenu" class="main-menu">
+        <button class="btn" onclick="showPdf('1600kcal')">1600 kcal</button>
+        <button class="btn" onclick="showPdf('1900kcal')">1900 kcal</button>
+        <button class="btn" onclick="showPdf('2200kcal')">2200 kcal</button>
+        <button class="btn" onclick="showPdf('2500kcal')">2500 kcal</button>
+        <button class="btn" onclick="showPdf('2800kcal')">2800 kcal</button>
+    </div>
+    <div id="pdfSection" class="pdf-section">
+        <button class="back-btn" onclick="goBack()">← Nazaj na izbiro</button>
+        <h2 id="selectedCategory" style="color: var(--purple);"></h2>
+        <div id="pdfList"></div>
+    </div>
+</div>
+<script>
+    const data = {
+        '1600kcal': [
+            { name: 'Jesen - 1600 kcal', url: '1600kcal_jesen.pdf' },
+            { name: 'Zima - 1600 kcal', url: '1600kcal_zima.pdf' },
+            { name: 'Pomlad - 1600 kcal', url: '1600kcal_pomlad.pdf' },
+            { name: 'Poletje - 1600 kcal', url: '1600kcal_poletje.pdf' }
+        ],
+        '1900kcal': [
+            { name: 'Jesen - 1900 kcal', url: '1900kcal_jesen.pdf' },
+            { name: 'Zima - 1900 kcal', url: '1900kcal_zima.pdf' },
+            { name: 'Pomlad - 1900 kcal', url: '1900kcal_pomlad.pdf' },
+            { name: 'Poletje - 1900 kcal', url: '1900kcal_poletje.pdf' }
+        ],
+        '2200kcal': [
+            { name: 'Jesen - 2200 kcal', url: '2200kcal_jesen.pdf' },
+            { name: 'Zima - 2200 kcal', url: '2200kcal_zima.pdf' },
+            { name: 'Pomlad - 2200 kcal', url: '2200kcal_pomlad.pdf' },
+            { name: 'Poletje - 2200 kcal', url: '2200kcal_poletje.pdf' }
+        ],
+        '2500kcal': [
+            { name: 'Jesen - 2500 kcal', url: '2500kcal_jesen.pdf' },
+            { name: 'Zima - 2500 kcal', url: '2500kcal_zima.pdf' },
+            { name: 'Pomlad - 2500 kcal', url: '2500kcal_pomlad.pdf' },
+            { name: 'Poletje - 2500 kcal', url: '2500kcal_poletje.pdf' }
+        ],
+        '2800kcal': [
+            { name: 'Jesen - 2800 kcal', url: '2800kcal_jesen' },
+            { name: 'Zima - 2800 kcal', url: '2800kcal_zima.pdf' },
+            { name: 'Pomlad - 2800 kcal', url: '2800kcal_pomlad.pdf' },
+            { name: 'Poletje - 2800 kcal', url: '2800kcal_poletje.pdf' }
+        ]
+    };
+
+    function showPdf(category) {
+        // Skrij meni in pokaži PDF sekcijo
+        document.getElementById('mainMenu').style.display = 'none';
+        document.getElementById('pdfSection').style.display = 'block';
+        document.getElementById('selectedCategory').innerText = category;
+        
+        const list = document.getElementById('pdfList');
+        list.innerHTML = ''; // Izprazni prejšnji seznam
+        
+        // Ustvari gumbe za PDF-je
+        data[category].forEach(item => {
+            list.innerHTML += `
+                <div class="pdf-item">
+                    <a href="${item.url}" target="_blank">${item.name}</a>
+                    <span class="pdf-badge">PDF</span>
+                </div>`;
+        });
+    }
+
+    function goBack() {
+        // Skrij PDF sekcijo in pokaži meni
+        document.getElementById('mainMenu').style.display = 'flex';
+        document.getElementById('pdfSection').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
